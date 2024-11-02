@@ -1,4 +1,4 @@
-package net.sasu.lib.stopwatch.stopwatch;
+package net.sasu.lib.time.stopwatch;
 
 import org.junit.jupiter.api.Test;
 

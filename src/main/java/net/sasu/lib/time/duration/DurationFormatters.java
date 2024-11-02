@@ -1,4 +1,4 @@
-package net.sasu.lib.stopwatch.duration;
+package net.sasu.lib.time.duration;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 

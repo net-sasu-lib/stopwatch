@@ -1,4 +1,4 @@
-package net.sasu.lib.stopwatch.stopwatch;
+package net.sasu.lib.time.stopwatch;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
@@ -11,14 +11,14 @@ import java.util.List;
  * Stopwatch for measuring elapsed time and outputting it in a human-readable format.
  * This is basically a "Instant factory", producing elapsed time points.
  * <p>
- * A stopwatch uses a timesource to measure time, typically at least once and saves these
+ * A time uses a timesource to measure time, typically at least once and saves these
  * in the class. The elapsedtimepoints can be later retrieved for further calculations
  * or displaying purposes.
  */
 public interface Stopwatch<StopwatchType extends Stopwatch<StopwatchType>> {
 
     /**
-     * Starts stopwatch
+     * Starts time
      */
     /*
 
@@ -36,7 +36,7 @@ public interface Stopwatch<StopwatchType extends Stopwatch<StopwatchType>> {
     */
 
     /**
-     * Stops stopwatch
+     * Stops time
      */
     /*
     default StopwatchType stop() {
@@ -74,7 +74,7 @@ public interface Stopwatch<StopwatchType extends Stopwatch<StopwatchType>> {
     List<Instant> getAllTimePoints();
 
     /**
-     * @return elapsed time in the base time units defined by this stopwatch implementation
+     * @return elapsed time in the base time units defined by this time implementation
      */
     default long getElapsedTimeNanos() {
         if (hasNotBeenStarted()) {

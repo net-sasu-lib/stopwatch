@@ -1,4 +1,4 @@
-package net.sasu.lib.stopwatch.ext.test;
+package net.sasu.lib.time.ext.test;
 
 import java.time.InstantSource;
 

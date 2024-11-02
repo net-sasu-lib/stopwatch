@@ -1,4 +1,4 @@
-package net.sasu.lib.stopwatch.output;
+package net.sasu.lib.time.output;
 
 import java.util.function.Consumer;
 import java.util.function.Function;

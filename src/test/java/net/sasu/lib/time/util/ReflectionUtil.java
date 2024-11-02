@@ -1,4 +1,4 @@
-package net.sasu.lib.stopwatch.util;
+package net.sasu.lib.time.util;
 
 import java.lang.reflect.Field;
 

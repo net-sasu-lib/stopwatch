@@ -1,4 +1,4 @@
-package net.sasu.lib.stopwatch.stopwatch;
+package net.sasu.lib.time.stopwatch;
 
 import java.time.InstantSource;
 
@@ -8,9 +8,9 @@ import java.time.InstantSource;
  * <p>
  * Typically used followingly:
  * <p>
- * 1) Create instance and start stopwatch with DefaultStopwatch.getInstanceAndStart()
- * 2) Stop stopwatch and get elapsed time as string with
- * stopwatch.getElapsedTimeAndStop()
+ * 1) Create instance and start time with DefaultStopwatch.getInstanceAndStart()
+ * 2) Stop time and get elapsed time as string with
+ * time.getElapsedTimeAndStop()
  *  
  * @author Sasu
  *

@@ -1,10 +1,9 @@
-package net.sasu.lib.stopwatch.time;
+package net.sasu.lib.time.stopwatch;
 
-import net.sasu.lib.stopwatch.stopwatch.BaseStopwatch;
-import net.sasu.lib.stopwatch.timesource.MockTimesource;
+import net.sasu.lib.time.timesource.MockTimesource;
 
 /**
- * Mock stopwatch for time-independent unit tests.
+ * Mock time for time-independent unit tests.
  */
 public class MockStopwatch extends BaseStopwatch<MockStopwatch> {
 

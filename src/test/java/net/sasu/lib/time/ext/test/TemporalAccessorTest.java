@@ -1,4 +1,4 @@
-package net.sasu.lib.stopwatch.ext.test;
+package net.sasu.lib.time.ext.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
