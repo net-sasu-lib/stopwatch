@@ -1,5 +1,7 @@
 package net.sasu.lib.time.stopwatch;
 
+import net.sasu.lib.time.stopwatch.state.StopwatchState;
+
 import java.time.Instant;
 import java.time.InstantSource;
 import java.util.ArrayList;
@@ -54,6 +56,11 @@ public class BaseStopwatch<StopwatchType extends Stopwatch<StopwatchType>> imple
     @Override
     public boolean isRunning() {
         return this.running;
+    }
+
+    @Override
+    public StopwatchState getState() {
+        return null;
     }
 
     @Override
