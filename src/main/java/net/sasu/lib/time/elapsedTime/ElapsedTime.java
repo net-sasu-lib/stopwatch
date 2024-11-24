@@ -130,4 +130,9 @@ public class ElapsedTime extends OutputSource<ElapsedTime> {
     public ElapsedTime formatPeriodISO(final long startMillis) {
         return this.format(ElapsedTimeFormatters.formatPeriodISO(startMillis));
     }
+
+    @Override
+    public String toString() {
+        return this.formatDurationHMS().getFormattedOutput();
+    }
 }

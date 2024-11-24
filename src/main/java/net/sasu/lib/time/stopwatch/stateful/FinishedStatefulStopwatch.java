@@ -10,7 +10,8 @@ public class FinishedStatefulStopwatch extends StartedStatefulStopwatch {
 
     private final Instant stopTime;
 
-    public FinishedStatefulStopwatch() {
+    public FinishedStatefulStopwatch(Instant startTime) {
+        super(startTime);
         this.stopTime = Instant.now();
     }
 

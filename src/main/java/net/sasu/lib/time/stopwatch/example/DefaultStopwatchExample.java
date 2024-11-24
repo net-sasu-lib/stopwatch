@@ -1,5 +1,6 @@
 package net.sasu.lib.time.stopwatch.example;
 
+import net.sasu.lib.time.stopwatch.stateful.FinishedStatefulStopwatch;
 import net.sasu.lib.time.stopwatch.stateful.InitializedStatefulStopwatch;
 import net.sasu.lib.time.stopwatch.stateful.StartedStatefulStopwatch;
 import org.slf4j.Logger;
@@ -19,12 +20,15 @@ public class DefaultStopwatchExample {
 		//stopwatch.stop().elapsedTime().println();
 		swStarted.getElapsedTime().println();
 
-		//you can also print explicitly to system out
-		//stopwatch.elapsedTime().printTo(System.out::println);
+		Thread.sleep(1000); //let 1 second elapse while stopwatch is still running
+
+		//let's stop the watch and print the time explicitly to system out
+		FinishedStatefulStopwatch swFinished = swStarted.stop();
+		swFinished.getElapsedTime().printTo(System.out::println);
 
 		//or maybe you want to use a Logger (e.g. SLF4J) instead?
 		Logger logger = LoggerFactory.getLogger(DefaultStopwatchExample.class);
-		//stopwatch.elapsedTime().printTo(logger::info);
+		swStarted.getElapsedTime().printTo(logger::info);
 
 		//you can apply individual formatting (see Apache DurationFormatUtils for syntax)
 		//this prints "1 seconds and 111 milliseconds"

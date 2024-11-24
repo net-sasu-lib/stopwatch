@@ -14,8 +14,12 @@ public class StartedStatefulStopwatch extends InitializedStatefulStopwatch {
         this.startTime = Instant.now();
     }
 
+    public StartedStatefulStopwatch(Instant startTime) {
+        this.startTime = startTime;
+    }
+
     public FinishedStatefulStopwatch stop() {
-        return new FinishedStatefulStopwatch();
+        return new FinishedStatefulStopwatch(this.startTime);
     }
 
     public ElapsedTime getElapsedTime() {
