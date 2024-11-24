@@ -1,12 +1,11 @@
 package net.sasu.lib.time.stopwatch.stateful;
 
-import java.time.Duration;
+import net.sasu.lib.time.stopwatch.state.StopwatchState;
 
+/**
+ * Marker interface
+ */
 public interface StatefulStopwatch {
 
-    /*
-    void start();
-    void stop();
-    Duration getElapsedTime();
-     */
+    public StopwatchState getState();
 }

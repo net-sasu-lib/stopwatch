@@ -19,7 +19,7 @@ public class ElapsedTime extends OutputSource<ElapsedTime> {
      *
      * @param duration the duration represented by this {@code ElapsedTime}
      */
-    public ElapsedTime(Duration duration, Object owner) {
+    public ElapsedTime(Duration duration) {
         super(ElapsedTime.class);
         this.duration = duration;
     }

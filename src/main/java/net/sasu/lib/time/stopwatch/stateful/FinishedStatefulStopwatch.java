@@ -1,5 +1,8 @@
 package net.sasu.lib.time.stopwatch.stateful;
 
+import net.sasu.lib.time.elapsedTime.ElapsedTime;
+import net.sasu.lib.time.stopwatch.state.StopwatchState;
+
 import java.time.Duration;
 import java.time.Instant;
 
@@ -11,11 +14,22 @@ public class FinishedStatefulStopwatch extends StartedStatefulStopwatch {
         this.stopTime = Instant.now();
     }
 
-    public Duration getElapsedTime(){
-        return Duration.between(this.getStartTime(), this.stopTime);
-    }
-
     public Instant getStopTime() {
         return stopTime;
     }
+
+    @Override
+    public StopwatchState getState() {
+        return StopwatchState.FINISHED;
+    }
+
+    @Override
+    public ElapsedTime getElapsedTime() {
+        return new ElapsedTime(getDurationUntilNow());
+    }
+
+    private Duration getDurationUntilNow(){
+        return Duration.between(this.getStartTime(), this.stopTime);
+    }
+
 }

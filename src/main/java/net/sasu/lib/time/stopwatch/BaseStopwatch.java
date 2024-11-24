@@ -58,7 +58,6 @@ public class BaseStopwatch<StopwatchType extends Stopwatch<StopwatchType>> imple
         return this.running;
     }
 
-    @Override
     public StopwatchState getState() {
         return null;
     }
