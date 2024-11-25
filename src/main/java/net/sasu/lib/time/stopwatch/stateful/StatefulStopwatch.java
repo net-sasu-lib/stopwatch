@@ -7,5 +7,10 @@ import net.sasu.lib.time.stopwatch.state.StopwatchState;
  */
 public interface StatefulStopwatch {
 
-    public StopwatchState getState();
+    boolean isFirst();
+    boolean isLast();
+
+    StatefulStopwatch getActiveInstance();
+
+    StopwatchState getState();
 }

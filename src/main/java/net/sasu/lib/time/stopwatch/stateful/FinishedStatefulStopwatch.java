@@ -33,4 +33,18 @@ public class FinishedStatefulStopwatch extends StartedStatefulStopwatch {
         return Duration.between(this.getStartTime(), this.stopTime);
     }
 
+    @Override
+    public boolean isFirst() {
+        return false;
+    }
+
+    @Override
+    public boolean isLast() {
+        return true;
+    }
+
+    @Override
+    public StatefulStopwatch getActiveInstance() {
+        return this;
+    }
 }

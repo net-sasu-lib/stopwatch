@@ -6,8 +6,30 @@ import java.time.Instant;
 
 public class InitializedStatefulStopwatch implements StatefulStopwatch {
 
+    private StatefulStopwatch activeInstance = this;
+
     public StartedStatefulStopwatch start() {
-        return new StartedStatefulStopwatch();
+        StartedStatefulStopwatch startedStatefulStopwatch = new StartedStatefulStopwatch();
+        this.activeInstance = startedStatefulStopwatch;
+        return startedStatefulStopwatch;
+    }
+
+    @Override
+    public boolean isFirst() {
+        return true;
+    }
+
+    @Override
+    public boolean isLast() {
+        return false;
+    }
+
+    @Override
+    public StatefulStopwatch getActiveInstance() {
+        if(this == this.activeInstance){
+            return this.activeInstance;
+        }
+        return this.activeInstance.getActiveInstance();
     }
 
     @Override
