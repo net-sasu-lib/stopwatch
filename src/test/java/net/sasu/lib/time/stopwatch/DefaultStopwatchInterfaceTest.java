@@ -4,29 +4,29 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DefaultStopwatchTest {
+class StopwatchInterfaceTest {
 
     @Test
     void stopTest1() {
-        DefaultStopwatch nst = new DefaultStopwatch();
+        Stopwatch nst = new Stopwatch();
         assertThrows(IllegalStateException.class, nst::stop);
     }
 
     @Test
     void stopTest2() {
-        DefaultStopwatch nst = new DefaultStopwatch();
+        Stopwatch nst = new Stopwatch();
         nst.start();
         nst.stop();
 
         long maxDurationNs = 1000_000;
-        long elapsedTimeRaw = nst.getElapsedTimeNanos();
+        long elapsedTimeRaw = nst.getElapsedTime().getDuration().toNanos();
         assertTrue(elapsedTimeRaw < maxDurationNs,
                 "Starting and stopping should not take " + (elapsedTimeRaw) + " nanoseconds.");
     }
 
     @Test
     void stopTest3() {
-        DefaultStopwatch nst = new DefaultStopwatch();
+        Stopwatch nst = new Stopwatch();
         nst.start();
 
         nst.stop();
@@ -44,7 +44,7 @@ class DefaultStopwatchTest {
 
     @Test
     void getElapsedTimeNanosTest() {
-        DefaultStopwatch nst = new DefaultStopwatch();
+        Stopwatch nst = new Stopwatch();
         assertThrows(IllegalStateException.class, nst::getElapsedTimeNanos);
 
         nst.start();
@@ -64,22 +64,21 @@ class DefaultStopwatchTest {
 
     @Test
     void stopAndGetElapsedTimeAsStringTest() throws InterruptedException {
-        DefaultStopwatch nst = new DefaultStopwatch();
+        Stopwatch nst = new Stopwatch();
         nst.start();
 
         waitAFewNanoseconds();
-        String elapsedTime = nst.stopAndGetElapsedTimeAsString();
+        nst.stop();
+        String elapsedTime = nst.getElapsedTime().toString();
 
         Thread.sleep(10);
-        String elapsedTime2 = nst.getElapsedTimeAsString();
+        nst.stop();
+        String elapsedTime2 = nst.getElapsedTime().toString();
         assertEquals(elapsedTime2, elapsedTime);
 
         waitAFewNanoseconds();
-        String elapsedTime3 = nst.getElapsedTimeAsString();
+        String elapsedTime3 = nst.getElapsedTime().toString();
         assertEquals(elapsedTime3, elapsedTime);
-
-        waitAFewNanoseconds();
-        assertThrows(IllegalStateException.class, nst::stopAndGetElapsedTimeAsString);
     }
 
     /*

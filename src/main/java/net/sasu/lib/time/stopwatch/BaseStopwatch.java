@@ -4,88 +4,51 @@ import net.sasu.lib.time.stopwatch.state.StopwatchState;
 
 import java.time.Instant;
 import java.time.InstantSource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
 
-/**
- * Measures passage of time using the given time source, or if none
- * given, SystemMilliSecondInstantSource as default.
- * <p>
- * Typically used followingly:
- * <p>
- * 1) Create instance and start time with DefaultStopwatch.getInstanceAndStart()
- * 2) Stop time and get elapsed time as string with
- * time.getElapsedTimeAndStop()
- *
- * @author Sasu
- */
-public class BaseStopwatch<StopwatchType extends Stopwatch<StopwatchType>> implements Stopwatch<StopwatchType> {
+public class BaseStopwatch<StopwatchType extends StopwatchInterface<StopwatchType>> implements StopwatchInterface<StopwatchType> {
 
     final InstantSource instantSource;
-    final List<Instant> allTimePoints = new ArrayList<>();
-    private boolean running = false;
+    private Instant startTime;
+    private Instant stopTime;
+    private StopwatchState state;
 
     public BaseStopwatch(InstantSource instantSource) {
         this.instantSource = instantSource;
-    }
-
-    /**
-     * @param instantSource
-     * @param outputter
-     */
-    public BaseStopwatch(InstantSource instantSource, Consumer<String> outputter) {
-        this.instantSource = instantSource;
-    }
-
-    @Override
-    public List<Instant> getAllTimePoints() {
-        return allTimePoints;
-    }
-
-    @Override
-    public InstantSource getInstantSource() {
-        return instantSource;
-    }
-
-    @Override
-    public Instant getInstant() {
-        return this.instantSource.instant();
-    }
-
-    @Override
-    public boolean isRunning() {
-        return this.running;
-    }
-
-    public StopwatchState getState() {
-        return null;
+        this.state = StopwatchState.INITIALIZED;
     }
 
     @Override
     public StopwatchType start() {
-        this.running = true;
-        return this.saveCurrentTime();
+        this.state = StopwatchState.STARTED;
+        this.startTime = getNow();
+        return (StopwatchType) this;
     }
 
     @Override
     public StopwatchType stop() {
-        if (!isRunning()) {
-            throw new IllegalStateException("Stopwatch is not running");
-        }
-        this.running = false;
-        return this.saveCurrentTime();
-    }
-
-    @Override
-    public StopwatchType saveCurrentTime() {
-        var elapsedTimePoint = createNewInstant();
-        this.getAllTimePoints().add(elapsedTimePoint);
+        this.state = StopwatchState.FINISHED;
+        this.stopTime = getNow();
         return (StopwatchType) this;
     }
 
-    private Instant createNewInstant() {
-        return getInstantSource().instant();
+    @Override
+    public Instant getStartTime() {
+        return this.startTime;
+    }
+
+    @Override
+    public Instant getStopTime() {
+        return this.stopTime;
+    }
+
+    @Override
+    public InstantSource getInstantSource() {
+        return InstantSource.system();
+    }
+
+    @Override
+    public StopwatchState getState() {
+        return this.state;
     }
 
 }

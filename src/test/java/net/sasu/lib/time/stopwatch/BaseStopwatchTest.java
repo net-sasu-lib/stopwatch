@@ -21,7 +21,7 @@ class BaseStopwatchTest {
         BaseStopwatch baseStopwatch = new BaseStopwatch(instantSource);
         baseStopwatch.start();
 
-        Duration duration = Duration.between(instant, baseStopwatch.getInstant());
+        Duration duration = Duration.between(instant, baseStopwatch.getNow());
         assertThat(duration, lessThan(Duration.of(10, ChronoUnit.MILLIS)));
     }
 
@@ -31,7 +31,7 @@ class BaseStopwatchTest {
 
         BaseStopwatch baseStopwatch = new BaseStopwatch(instantSource);
         baseStopwatch.start();
-        Instant instantBeforeSleep = baseStopwatch.getInstant();
+        Instant instantBeforeSleep = baseStopwatch.getNow();
 
         Thread.sleep(1000);
         Instant instant = instantSource.instant();
