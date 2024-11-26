@@ -17,6 +17,15 @@ import java.util.function.Function;
  */
 public class ElapsedTimeFormatters {
 
+    /*
+     * Constructor to prevent non-static construction
+     * @throws IllegalAccessException always
+     */
+    private ElapsedTimeFormatters() throws IllegalAccessException {
+        throw new IllegalAccessException("Static use only");
+    }
+
+
     /**
      * Returns a function that formats the duration of an {@link ElapsedTime} instance according to the specified format.
      *

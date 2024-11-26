@@ -15,6 +15,14 @@ import java.util.function.Function;
 public class DurationFormatters {
 
     /**
+     * Constructor to prevent non-static construction
+     * @throws IllegalAccessException always
+     */
+    private DurationFormatters() throws IllegalAccessException {
+        throw new IllegalAccessException("Static use only");
+    }
+
+    /**
      * Returns a function that formats a {@link Duration} according to the specified format.
      *
      * @param format       the format string

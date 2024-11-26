@@ -1,6 +1,5 @@
 package net.sasu.lib.time.stopwatch;
 
-import net.sasu.lib.time.stopwatch.example.DefaultStopwatchExample;
 import net.sasu.lib.time.stopwatch.state.StopwatchState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +7,10 @@ import org.slf4j.LoggerFactory;
 import java.time.Instant;
 import java.time.InstantSource;
 
+/**
+ * Basic implementation of the StopwatchInterface.
+ * @param <StopwatchType> The implementing class
+ */
 public class BaseStopwatch<StopwatchType extends StopwatchInterface<StopwatchType>> implements StopwatchInterface<StopwatchType> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -17,6 +20,10 @@ public class BaseStopwatch<StopwatchType extends StopwatchInterface<StopwatchTyp
     private Instant stopTime;
     private StopwatchState state;
 
+    /**
+     * Creates a new BaseStopwatch in state StopwatchState.INITIALIZED
+     * @param instantSource The InstantSource object to be used
+     */
     public BaseStopwatch(InstantSource instantSource) {
         this.instantSource = instantSource;
         this.state = StopwatchState.INITIALIZED;

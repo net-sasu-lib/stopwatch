@@ -4,8 +4,24 @@ import net.sasu.lib.time.stopwatch.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Example class
+ */
 public class DefaultStopwatchExample {
 
+	/*
+	 * Constructor to prevent non-static construction
+	 * @throws IllegalAccessException always
+	 */
+	private DefaultStopwatchExample() throws IllegalAccessException {
+		throw new IllegalAccessException("Static use only");
+	}
+
+	/**
+	 * Example class
+	 * @param args Arguments
+	 * @throws InterruptedException when interrupted
+	 */
 	public static void  main(String[] args) throws InterruptedException {
 		Stopwatch stopwatch = new Stopwatch().start();
 		Thread.sleep(1111); //let 1.111 seconds elapse
