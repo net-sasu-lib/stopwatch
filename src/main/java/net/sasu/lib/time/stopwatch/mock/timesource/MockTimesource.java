@@ -1,4 +1,4 @@
-package net.sasu.lib.time.timesource;
+package net.sasu.lib.time.stopwatch.mock.timesource;
 
 import java.time.Instant;
 import java.time.InstantSource;

@@ -96,13 +96,17 @@ public interface StopwatchInterface<StopwatchType extends StopwatchInterface<Sto
         return this.getElapsedTime().getDuration().toNanos();
     }
 
+    default boolean isRunning(){
+        return this.getState() == StopwatchState.STARTED;
+    }
+
     /**
      * Calculates the duration from the start time to the current time.
      *
      * @return the {@link Duration} from the start time to now
      */
     private Duration getDurationUntilNow() {
-        return Duration.between(this.getStartTime(), Instant.now());
+        return Duration.between(this.getStartTime(), this.getNow());
     }
 
     /**

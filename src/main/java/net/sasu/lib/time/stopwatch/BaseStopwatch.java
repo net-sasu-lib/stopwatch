@@ -63,7 +63,7 @@ public class BaseStopwatch<StopwatchType extends StopwatchInterface<StopwatchTyp
 
     @Override
     public InstantSource getInstantSource() {
-        return InstantSource.system();
+        return this.instantSource;
     }
 
     @Override
