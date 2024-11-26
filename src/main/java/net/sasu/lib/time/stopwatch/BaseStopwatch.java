@@ -1,11 +1,16 @@
 package net.sasu.lib.time.stopwatch;
 
+import net.sasu.lib.time.stopwatch.example.DefaultStopwatchExample;
 import net.sasu.lib.time.stopwatch.state.StopwatchState;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 import java.time.InstantSource;
 
 public class BaseStopwatch<StopwatchType extends StopwatchInterface<StopwatchType>> implements StopwatchInterface<StopwatchType> {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     final InstantSource instantSource;
     private Instant startTime;
@@ -19,6 +24,10 @@ public class BaseStopwatch<StopwatchType extends StopwatchInterface<StopwatchTyp
 
     @Override
     public StopwatchType start() {
+        if(!this.state.equals(StopwatchState.INITIALIZED)) {
+            logger.warn("Attempt to start an already started stopwatch failed.");
+            return (StopwatchType) this;
+        }
         this.state = StopwatchState.STARTED;
         this.startTime = getNow();
         return (StopwatchType) this;
@@ -26,6 +35,10 @@ public class BaseStopwatch<StopwatchType extends StopwatchInterface<StopwatchTyp
 
     @Override
     public StopwatchType stop() {
+        if(this.state.equals(StopwatchState.FINISHED)) {
+            logger.warn("Attempt to stop an already finished stopwatch failed.");
+            return (StopwatchType) this;
+        }
         this.state = StopwatchState.FINISHED;
         this.stopTime = getNow();
         return (StopwatchType) this;

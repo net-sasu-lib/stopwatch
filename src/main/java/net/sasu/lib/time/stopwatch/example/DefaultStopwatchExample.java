@@ -14,12 +14,10 @@ public class DefaultStopwatchExample {
 		//this prints "00:00:01.111"
 		stopwatch.stop().getElapsedTime().println();
 
-		Thread.sleep(1000); //let 1 second elapse while stopwatch is still running
-
-		//let's stop the watch and print the time explicitly to system out
-
 		//or maybe you want to use a Logger (e.g. SLF4J) instead?
+		//(or any method implementing java.util.function.Consumer<String>)
 		Logger logger = LoggerFactory.getLogger(DefaultStopwatchExample.class);
+		stopwatch.getElapsedTime().printTo(logger::info);
 
 		//you can apply individual formatting (see Apache DurationFormatUtils for syntax)
 		//this prints "1 seconds and 111 milliseconds"
