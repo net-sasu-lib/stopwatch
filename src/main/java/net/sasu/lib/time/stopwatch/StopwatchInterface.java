@@ -96,6 +96,12 @@ public interface StopwatchInterface<StopwatchType extends StopwatchInterface<Sto
         return this.getElapsedTime().getDuration().toNanos();
     }
 
+    /**
+     * Shorthand for checking if the stopwatch is in state
+     * StopwatchState.STARTED
+     *
+     * @return boolean true if STARTED, otherwise false
+     */
     default boolean isRunning(){
         return this.getState() == StopwatchState.STARTED;
     }
