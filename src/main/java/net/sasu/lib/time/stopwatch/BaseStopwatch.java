@@ -21,7 +21,8 @@ public class BaseStopwatch<StopwatchType extends StopwatchInterface<StopwatchTyp
     private StopwatchState state;
 
     /**
-     * Creates a new BaseStopwatch in state StopwatchState.INITIALIZED
+     * Creates a new BaseStopwatch in state <code>StopwatchState.INITIALIZED</code>.
+     *
      * @param instantSource The InstantSource object to be used
      */
     public BaseStopwatch(InstantSource instantSource) {

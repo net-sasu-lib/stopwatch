@@ -8,14 +8,14 @@ import java.time.Duration;
 import java.time.Instant;
 
 /**
- * Mock time for unit tests.
+ * Mock stopwatch for unit tests.
  */
 public class MockStopwatch extends BaseStopwatch<MockStopwatch> {
 
     private final MockTimesource instantSource;
 
     /**
-     * Creates a new MockStopwatch
+     * Creates a new MockStopwatch.
      */
     public MockStopwatch() {
         super(new MockTimesource());
@@ -23,14 +23,15 @@ public class MockStopwatch extends BaseStopwatch<MockStopwatch> {
     }
 
     /**
-     * Increments the elapsed time by one unit
+     * Increments the elapsed time by one unit.
      */
     public void increment() {
         this.instantSource.increment();
     }
 
     /**
-     * Increments the elapsed time by the given amount
+     * Increments the elapsed time by the given amount.
+     *
      * @param amount Units of time to increment
      */
     public void increment(long amount) {

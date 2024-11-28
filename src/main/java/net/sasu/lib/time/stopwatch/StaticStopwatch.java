@@ -12,8 +12,9 @@ public class StaticStopwatch {
 
     private static Stopwatch stopwatch = null;
 
-    /*
+    /**
      * Constructor to prevent non-static construction
+     *
      * @throws IllegalAccessException always
      */
     private StaticStopwatch() throws IllegalAccessException {

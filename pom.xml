@@ -8,13 +8,18 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Stopwatch</name>
-	<description>Java library for measuring and estimating elapsed time</description>
+	<name>stopwatch</name>
+	<description>Java 17 library for measuring elapsed time. A collection of programmatic stopwatches.
+		* time measurement with good developer UX
+		* extendable classes as a base for your own use cases
+		* functions for human-readable time output and limitless formatting options
+		* flexible output with easy defaults for outputting to a logger or `System.out`
+	</description>
 
 	<distributionManagement>
 		<snapshotRepository>
 			<id>nexus-snapshots-repo</id>
-			<url>https://nexus.snow4.sasu.org/repository/maven-snapshots/</url>
+			<url>${repo.nexus.server}/repository/maven-snapshots/</url>
 		</snapshotRepository>
 		<repository>
 			<id>sonatype-nexus-releases</id>
@@ -166,7 +171,7 @@
 							<skip>${skipDeploy}</skip>
 							<!--
 							<repositoryId>nexus-snapshots-repo</repositoryId>
-							<url>https://nexus.snow4.sasu.org/repository/maven-snapshots/</url>
+							<url>${repo.nexus.server}/repository/maven-snapshots/</url>
 							-->
 						</configuration>
 					</execution>

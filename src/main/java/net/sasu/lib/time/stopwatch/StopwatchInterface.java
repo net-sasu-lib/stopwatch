@@ -17,14 +17,14 @@ import java.time.InstantSource;
 public interface StopwatchInterface<StopwatchType extends StopwatchInterface<StopwatchType>> {
 
     /**
-     * Starts the stopwatch. Sets the start time and transitions the stopwatch state to STARTED.
+     * Starts the stopwatch. Sets the start time and transitions the stopwatch state to <code>STARTED</code>.
      *
      * @return the current instance of the stopwatch for method chaining
      */
     StopwatchType start();
 
     /**
-     * Stops the stopwatch. Sets the stop time and transitions the stopwatch state to FINISHED.
+     * Stops the stopwatch. Sets the stop time and transitions the stopwatch state to <code>FINISHED</code>.
      *
      * @return the current instance of the stopwatch for method chaining
      */
@@ -33,21 +33,21 @@ public interface StopwatchInterface<StopwatchType extends StopwatchInterface<Sto
     /**
      * Gets the start time of the stopwatch.
      *
-     * @return the {@link Instant} representing the time the stopwatch was started
+     * @return the <code>Instant</code> representing the time the stopwatch was started
      */
     Instant getStartTime();
 
     /**
      * Gets the stop time of the stopwatch.
      *
-     * @return the {@link Instant} representing the time the stopwatch was stopped
+     * @return the <code>Instant</code> representing the time the stopwatch was stopped
      */
     Instant getStopTime();
 
     /**
      * Gets the time source used by this stopwatch.
      *
-     * @return the {@link InstantSource} used to measure time
+     * @return the <code>InstantSource</code> used to measure time
      */
     InstantSource getInstantSource();
 
@@ -81,7 +81,7 @@ public interface StopwatchInterface<StopwatchType extends StopwatchInterface<Sto
     /**
      * Gets the current time from the stopwatch's time source.
      *
-     * @return the {@link Instant} representing the current time
+     * @return the <code>Instant</code> representing the current time
      */
     default Instant getNow() {
         return this.getInstantSource().instant();
