@@ -1,6 +1,6 @@
 # Stopwatch
 
-This Java 21 stopwatch provides multiple stopwatch implementations for
+This Java 17 library provides multiple stopwatch implementations for
 
 - time measurement with good developer UX
 - extendable classes as a base for your own use cases
@@ -12,9 +12,6 @@ This Java 21 stopwatch provides multiple stopwatch implementations for
 # Basic usage
 
 ## Simple time measurement using a static stopwatch
-
-
-
 
 # License
 

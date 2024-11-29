@@ -9,11 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>stopwatch</name>
-	<description>Java 17 library for measuring elapsed time. A collection of programmatic stopwatches.
-		* time measurement with good developer UX
-		* extendable classes as a base for your own use cases
-		* functions for human-readable time output and limitless formatting options
-		* flexible output with easy defaults for outputting to a logger or `System.out`
+	<description>
 	</description>
 
 	<distributionManagement>
@@ -29,10 +25,13 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 		<junit.jupiter.version>5.11.1</junit.jupiter.version>
 		<jacoco.version>0.8.12</jacoco.version>
 		<mockito.version>5.14.2</mockito.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
 
 	<reporting>
