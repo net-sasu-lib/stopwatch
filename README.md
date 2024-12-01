@@ -7,6 +7,8 @@ This Java 17 library provides multiple stopwatch implementations for
 - functions for human-readable time output and limitless formatting options
 - flexible output with easy defaults for outputting to a logger or `System.out`
 
+{{!./doc/about.md}}
+
 # Table of contents
 
 # Basic usage

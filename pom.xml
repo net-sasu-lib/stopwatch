@@ -9,8 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>stopwatch</name>
-	<description>
-	</description>
+	<description>Java 17 stopwatches for measuring elapsed time.</description>
 
 	<distributionManagement>
 		<snapshotRepository>
@@ -32,6 +31,10 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.release>17</maven.compiler.release>
+
+		<doxiaVersion>2.0.0</doxiaVersion>
+		<doxiaSitetoolsVersion>2.0.0</doxiaSitetoolsVersion>
+
 	</properties>
 
 	<reporting>
@@ -92,6 +95,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.20.0</version>
+				<configuration>
+					<inputEncoding>UTF-8</inputEncoding>
+					<outputEncoding>UTF-8</outputEncoding>
+					<siteDirectory>${project.basedir}/src/site</siteDirectory>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -192,83 +200,6 @@
 
 	<profiles>
 		<profile>
-			<id>sonarcloud</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<sonar.host.url>https://sonarcloud.io/</sonar.host.url>
-				<sonar.organization>sasuw</sonar.organization>
-			</properties>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.jacoco</groupId>
-						<artifactId>jacoco-maven-plugin</artifactId>
-						<version>${jacoco.version}</version>
-						<executions>
-							<execution>
-								<id>prepare-agent</id>
-								<goals>
-									<goal>prepare-agent</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>report</id>
-								<phase>prepare-package</phase>
-								<goals>
-									<goal>report</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>post-unit-test</id>
-								<phase>test</phase>
-								<goals>
-									<goal>report</goal>
-								</goals>
-								<configuration>
-									<!-- Sets the path to the file which contains the execution data. -->
-									<dataFile>target/jacoco.exec</dataFile>
-									<!-- Sets the output directory for the code coverage report. -->
-									<outputDirectory>target/jacoco-ut</outputDirectory>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!--
-                        maven-dependency-plugin for SonarQube so that
-                        sonar.java.libraries parameter can be set
-                        to ./target/dist/lib/third-party/*.jar
-                    -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-dependency-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>copy-dependencies-third-party</id>
-								<phase>prepare-package</phase>
-								<goals>
-									<goal>copy-dependencies</goal>
-								</goals>
-								<configuration>
-									<outputDirectory>target/dist/lib/third-party</outputDirectory>
-								</configuration>
-							</execution>
-							<execution>
-								<goals>
-									<goal>properties</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
 			<id>release</id>
 			<activation>
 				<property>
@@ -293,8 +224,6 @@
 				<skipDeploy>false</skipDeploy>
 			</properties>
 		</profile>
-
-
 	</profiles>
 
 	<dependencies>
@@ -344,5 +273,66 @@
 			<artifactId>slf4j-simple</artifactId>
 			<version>2.0.16</version>
 		</dependency>
+
+		<!-- site -->
+		<!-- Doxia -->
+		<dependency>
+			<groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-sink-api</artifactId>
+			<version>${doxiaVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-core</artifactId>
+			<version>${doxiaVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-module-xhtml5</artifactId>
+			<version>${doxiaVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-module-apt</artifactId>
+			<version>${doxiaVersion}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-module-xdoc</artifactId>
+			<version>${doxiaVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-module-fml</artifactId>
+			<version>${doxiaVersion}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-module-markdown</artifactId>
+			<version>${doxiaVersion}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Doxia Sitetools -->
+		<dependency>
+			<groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-site-model</artifactId>
+			<version>${doxiaSitetoolsVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-site-renderer</artifactId>
+			<version>${doxiaSitetoolsVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.maven.doxia</groupId>
+			<artifactId>doxia-integration-tools</artifactId>
+			<version>${doxiaSitetoolsVersion}</version>
+		</dependency>
+
 	</dependencies>
 </project>
