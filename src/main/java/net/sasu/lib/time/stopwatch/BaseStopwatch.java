@@ -11,7 +11,8 @@ import java.time.InstantSource;
  * Basic implementation of the StopwatchInterface.
  * @param <StopwatchType> The implementing class
  */
-public class BaseStopwatch<StopwatchType extends StopwatchInterface<StopwatchType>> implements StopwatchInterface<StopwatchType> {
+public class BaseStopwatch<StopwatchType extends StopwatchInterface<StopwatchType>>
+        implements StopwatchInterface<StopwatchType> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

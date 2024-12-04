@@ -22,11 +22,10 @@ class BaseStopwatchTest {
     @Test
     void getNowTestAfterStart() {
         InstantSource instantSource = InstantSource.system();
-        Instant instant = instantSource.instant();
-
         BaseStopwatch baseStopwatch = new BaseStopwatch(instantSource);
-        baseStopwatch.start();
 
+        Instant instant = instantSource.instant();
+        baseStopwatch.start();
         Duration duration = Duration.between(instant, baseStopwatch.getNow());
         assertThat(duration, lessThan(Duration.of(10, ChronoUnit.MILLIS)));
     }

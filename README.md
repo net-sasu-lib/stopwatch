@@ -1,5 +1,5 @@
 # Stopwatch
-
+## About
 This Java 17 library provides multiple stopwatch implementations for
 
 - time measurement with good developer UX
@@ -9,19 +9,13 @@ This Java 17 library provides multiple stopwatch implementations for
 
 # Table of contents
 
-[Basic usage](#basic-usage)
-
-[License](#license)
-
-[Documentation](#documentation)
-
-[Artifacts](#artifacts)
-
-[Building](#building)
-
-[Contributing](#contributing)
-
-[Changelog](#changelog)
+- [Basic usage](#basic-usage)
+- [License](#license)
+- [Documentation](#documentation)
+- [Artifacts](#artifacts)
+- [Building](#building)
+- [Contributing](#contributing)
+- [Changelog](#changelog)
 
 # Basic usage
 
