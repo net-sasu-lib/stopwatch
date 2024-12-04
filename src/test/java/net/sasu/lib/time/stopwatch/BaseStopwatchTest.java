@@ -10,11 +10,17 @@ import java.time.temporal.ChronoUnit;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-
+/**
+ * Tests for BaseStopwatch
+ */
 class BaseStopwatchTest {
 
+    /**
+     * Tests that getNow returns a plausible value directly after
+     * starting the stopwatch
+     */
     @Test
-    void getInstantTest1() {
+    void getNowTestAfterStart() {
         InstantSource instantSource = InstantSource.system();
         Instant instant = instantSource.instant();
 
@@ -25,8 +31,12 @@ class BaseStopwatchTest {
         assertThat(duration, lessThan(Duration.of(10, ChronoUnit.MILLIS)));
     }
 
+    /**
+     * Tests that getNow returns a plausible value after
+     * running the stopwatch for one second.
+     */
     @Test
-    void getInstantTest2() throws InterruptedException {
+    void getNowTestAfterRunningOneSecond() throws InterruptedException {
         InstantSource instantSource = InstantSource.system();
 
         BaseStopwatch baseStopwatch = new BaseStopwatch(instantSource);

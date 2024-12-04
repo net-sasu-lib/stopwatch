@@ -10,11 +10,17 @@ This Java 17 library provides multiple stopwatch implementations for
 # Table of contents
 
 [Basic usage](#basic-usage)
+
 [License](#license)
+
 [Documentation](#documentation)
+
 [Artifacts](#artifacts)
+
 [Building](#building)
+
 [Contributing](#contributing)
+
 [Changelog](#changelog)
 
 # Basic usage
@@ -82,7 +88,7 @@ Do what you want with it, no attribution necessary.
 
 ## Zero-Clause BSD
 
-Copyright (C) 2022-2024 Sasu Welling and contributors.
+Copyright (C) 2024 and onwards by contributors of this project.
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted.
@@ -135,6 +141,6 @@ Contributions are welcome. If you find a bug or want to improve the library plea
 
 # Changelog
 
-See CHANGELOG.md
+See [CHANGELOG.md](CHANGELOG.md)
 
 

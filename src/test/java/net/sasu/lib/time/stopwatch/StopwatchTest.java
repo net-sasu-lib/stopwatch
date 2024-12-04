@@ -4,10 +4,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StopwatchInterfaceTest {
+/**
+ * Tests for Stopwatch class.
+ */
+class StopwatchTest {
 
+    /**
+     * Tests that elapsed time after starting and stopping the stopwatch
+     * is reasonably short.
+     */
     @Test
-    void stopTest1() {
+    void stopTestStopPerformance() {
         Stopwatch nst = new Stopwatch();
         nst.start();
         nst.stop();
@@ -18,22 +25,42 @@ class StopwatchInterfaceTest {
                 "Starting and stopping should not take " + (elapsedTimeRaw) + " nanoseconds.");
     }
 
+
+    /**
+     * Tests that getElapsedTimeNanos returns always the same
+     * value when stopwatch is stopped.
+     */
     @Test
-    void stopTest2() {
+    void getElapsedTimeNanosTestStateAdherence() {
         Stopwatch nst = new Stopwatch();
         nst.start();
-
         nst.stop();
-        long elapsedTimeRaw1 = nst.getElapsedTimeNanos();
 
-        assertTrue(true);
+        long elapsedTimeRaw1 = nst.getElapsedTimeNanos();
         long elapsedTimeRaw2 = nst.getElapsedTimeNanos();
         assertEquals(elapsedTimeRaw1, elapsedTimeRaw2);
-
-        nst.start();
         waitAFewNanoseconds();
         long elapsedTimeRaw3 = nst.getElapsedTimeNanos();
-        assertEquals(elapsedTimeRaw3, elapsedTimeRaw2);
+        assertEquals(elapsedTimeRaw2, elapsedTimeRaw3);
+    }
+
+
+    /**
+     * Tests that elapsed time as returned by getElapsedTimeNanos
+     * does not increase after attempting to re-start an already
+     * stopped stopwatch.
+     */
+    @Test
+    void stopTestElapsedTimeAfterFailedAttemptToStart() {
+        Stopwatch nst = new Stopwatch();
+        nst.start();
+        nst.stop();
+
+        long elapsedTimeRaw1 = nst.getElapsedTimeNanos();
+        nst.start();
+        waitAFewNanoseconds();
+        long elapsedTimeRaw2 = nst.getElapsedTimeNanos();
+        assertEquals(elapsedTimeRaw1, elapsedTimeRaw2);
     }
 
     @Test
