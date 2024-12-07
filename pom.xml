@@ -14,14 +14,17 @@
 	<url>https://net.sasu.lib/stopwatch</url>
 
 	<distributionManagement>
+		<!--
+
 		<snapshotRepository>
 			<id>nexus-snapshots-repo</id>
 			<url>${repo.nexus.server}/repository/maven-snapshots/</url>
 		</snapshotRepository>
 		<repository>
-			<id>sonatype-nexus-releases</id>
-			<url>https://central.sonatype.com</url>
+			<id>nexus-releases-repo</id>
+			<url>${repo.nexus.server}/repository/maven-releases/</url>
 		</repository>
+		-->
 	</distributionManagement>
 
 	<properties>
@@ -83,6 +86,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<version>3.5.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>3.6.0</version>
 			</plugin>
 		</plugins>
 	</reporting>
@@ -157,100 +165,128 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			<!--
 			<plugin>
 				<groupId>org.sonatype.central</groupId>
 				<artifactId>central-publishing-maven-plugin</artifactId>
 				<version>0.6.0</version>
-				<extensions>true</extensions>
 				<configuration>
 					<skipPublishing>true</skipPublishing>
-					<publishingServerId>central</publishingServerId>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>deploy</goals>
-					</execution>
-				</executions>
 			</plugin>
-			-->
-
-			<!-- Plugin for deploying releases to Sonatype -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>3.1.3</version>
-				<executions>
-					<!--
-					<execution>
-						<id>deploy-to-sonatype</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>deploy</goal>
-						</goals>
-						<configuration>
-							<skip>${skipDeploy}</skip>
-							<repositoryId>sonatype-nexus-releases</repositoryId>
-							<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-						</configuration>
-					</execution>
-					-->
-					<execution>
-						<id>deploy-to-nexus-snapshots-repo</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>deploy</goal>
-						</goals>
-						<configuration>
-							<skip>${skipDeploy}</skip>
-							<!--
-							<repositoryId>nexus-snapshots-repo</repositoryId>
-							<url>${repo.nexus.server}/repository/maven-snapshots/</url>
-							-->
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.7.0</version>
-				<extensions>true</extensions>
-				<configuration>
-					<serverId>sonatype-nexus-releases</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 
 	<profiles>
+		<!-- Deployment profiles. The profile is determined by
+		1. release target (central/staging), i.e. Maven Central or Staging Repo testing
+		2. deployment type (snapshot/release)
+		As profile activatation in Maven 3.x is not possible with multiple properties,
+		the properties are combined.
+		-->
+		<!-- Profile to publish to Maven Central -->
 		<profile>
-			<id>release</id>
+			<id>central-release</id>
 			<activation>
 				<property>
-					<name>!skipDeploy</name>
-					<value>true</value>
+					<name>releaseTargetAndDeploymentType</name>
+					<value>central-release</value>
 				</property>
 			</activation>
-			<properties>
-				<skipDeploy>false</skipDeploy>
-			</properties>
+			<distributionManagement>
+				<repository>
+					<id>sonatype-nexus-releases</id>
+					<url>https://central.sonatype.com</url>
+				</repository>
+			</distributionManagement>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.central</groupId>
+						<artifactId>central-publishing-maven-plugin</artifactId>
+						<extensions>true</extensions>
+						<configuration>
+							<skipPublishing>false</skipPublishing>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
+
+		<!-- Profile for deploying snapshots to staging repo -->
 		<profile>
-			<id>snapshot</id>
+			<id>staging-snapshot</id>
 			<activation>
 				<property>
-					<name>!skipDeploy</name>
-					<value>true</value>
+					<name>releaseTargetAndDeploymentType</name>
+					<value>staging-snapshot</value>
 				</property>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			<properties>
-				<skipDeploy>false</skipDeploy>
-			</properties>
+			<distributionManagement>
+				<snapshotRepository>
+					<id>nexus-snapshots-repo</id>
+					<url>${repo.nexus.server}/repository/maven-snapshots/</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</snapshotRepository>
+			</distributionManagement>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<configuration>
+							<skip>false</skip>
+							<repositoryId>nexus-snapshots-repo</repositoryId>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- Profile for deploying releases to staging repo -->
+		<profile>
+			<id>staging-release</id>
+			<activation>
+				<property>
+					<name>releaseTargetAndDeploymentType</name>
+					<value>staging-release</value>
+				</property>
+			</activation>
+			<distributionManagement>
+				<repository>
+					<id>nexus-releases-repo</id>
+					<url>${repo.nexus.server}/repository/maven-releases/</url>
+				</repository>
+			</distributionManagement>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<configuration>
+							<skip>false</skip>
+							<repositoryId>nexus-releases-repo</repositoryId>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 

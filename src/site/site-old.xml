@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<site name="stopwatch (net.sasu.lib)">
+<project name="stopwatch (net.sasu.lib)">
     <skin>
         <groupId>org.apache.maven.skins</groupId>
         <artifactId>maven-fluido-skin</artifactId>
@@ -19,9 +19,14 @@
         </fluidoSkin>
     </custom>
     <version position="right"/>
-    <bannerLeft name="stopwatch (net.sasu.lib)"
-                href="https://gitea.snow4.sasu.org/net.sasu.lib/stopwatch/">
-        <image src="images/stopwatch.svg" />
+    <poweredBy>
+        <logo name="" href="https://net.sasu.lib/stopwatch"
+              img=""/>
+    </poweredBy>
+    <bannerLeft>
+        <name>stopwatch (net.sasu.lib)</name>
+        <src>images/stopwatch.svg</src>
+        <href>https://gitea.snow4.sasu.org/net.sasu.lib/stopwatch/</href>
     </bannerLeft>
     <body>
         <links>
@@ -33,4 +38,4 @@
         </menu>
         <menu ref="reports"/>
     </body>
-</site>
+</project>
