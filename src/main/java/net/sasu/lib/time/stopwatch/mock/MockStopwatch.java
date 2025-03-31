@@ -8,57 +8,74 @@ import java.time.Duration;
 import java.time.Instant;
 
 /**
- * Mock stopwatch for unit tests.
+ * Mock stopwatch for unit tests with ability to set specific time points.
  */
 public class MockStopwatch extends BaseStopwatch<MockStopwatch> {
 
     private final MockTimesource instantSource;
+    private Instant currentTime;
 
     /**
-     * Creates a new MockStopwatch.
+     * Creates a new MockStopwatch initialized to epoch.
      */
     public MockStopwatch() {
         super(new MockTimesource());
         this.instantSource = (MockTimesource) super.getInstantSource();
+        this.currentTime = Instant.EPOCH;
     }
 
     /**
-     * Increments the elapsed time by one unit.
-     */
-    public void increment() {
-        this.instantSource.increment();
-    }
-
-    /**
-     * Increments the elapsed time by the given amount.
+     * Sets the current time of the mock stopwatch.
      *
-     * @param amount Units of time to increment
+     * @param instant The time to set
      */
-    public void increment(long amount) {
-        this.instantSource.increment(amount);
+    public void setCurrentTime(Instant instant) {
+        this.currentTime = instant;
+        this.instantSource.setCurrentTime(instant);
     }
 
     /**
-     * Calculates and retrieves the elapsed time as an {@link ElapsedTime} object.
-     * <p>
-     * The result depends on the current state of the stopwatch:
-     * <ul>
-     *     <li>If {@code INITIALIZED}, the elapsed time is zero.</li>
-     *     <li>If {@code STARTED}, the elapsed time is calculated up to the current time.</li>
-     *     <li>If {@code FINISHED}, the elapsed time is calculated from the start to the stop time.</li>
-     * </ul>
-     *
-     * @return an {@link ElapsedTime} object representing the elapsed time
+     * Increments the elapsed time by given amount of milliseconds
+     * @param amount milliseconds
      */
+    public void incrementMilliseconds(long amount) {
+        this.currentTime = this.currentTime.plusMillis(amount);
+        this.instantSource.setCurrentTime(this.currentTime);
+    }
+
+    /**
+     * Increments the elapsed time by one second
+     */
+    public void incrementSecond() {
+        this.currentTime = this.currentTime.plusSeconds(1);
+        this.instantSource.setCurrentTime(this.currentTime);
+    }
+
+    /**
+     * Increments the elapsed time by the given amount of seconds.
+     *
+     * @param seconds Amount of seconds to increment
+     */
+    public void incrementSeconds(long seconds) {
+        this.currentTime = this.currentTime.plusSeconds(seconds);
+        this.instantSource.setCurrentTime(this.currentTime);
+    }
+
+    /**
+     * Gets the current mock time.
+     *
+     * @return the current mock time
+     */
+    public Instant getCurrentTime() {
+        return this.currentTime;
+    }
+
+    @Override
     public ElapsedTime getElapsedTime() {
         return switch (this.getState()) {
             case INITIALIZED -> new ElapsedTime(Duration.ZERO);
-            case STARTED, FINISHED -> new ElapsedTime(getDurationUntilMockNow());
+            case STARTED -> new ElapsedTime(Duration.between(this.getStartTime(), this.currentTime));
+            case FINISHED -> new ElapsedTime(Duration.between(this.getStartTime(), this.getStopTime()));
         };
     }
-
-    private Duration getDurationUntilMockNow() {
-        return Duration.between(Instant.EPOCH, this.getNow());
-    }
-
 }
