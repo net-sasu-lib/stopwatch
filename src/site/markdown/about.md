@@ -119,7 +119,7 @@ and navigate to http://localhost:8080/apidocs/index.html
 <dependency>
   <groupId>net.sasu.lib.time</groupId>
   <artifactId>stopwatch</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 

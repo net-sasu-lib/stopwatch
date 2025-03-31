@@ -4,14 +4,13 @@
     <skin>
         <groupId>org.apache.maven.skins</groupId>
         <artifactId>maven-fluido-skin</artifactId>
-        <version>2.0.0</version>
     </skin>
     <custom>
         <fluidoSkin>
             <topBarEnabled>false</topBarEnabled>
             <sideBarEnabled>true</sideBarEnabled>
             <gitHub>
-                <projectId>sasuw/stopwatch</projectId>
+                <projectId>net-sasu-lib/stopwatch</projectId>
                 <ribbonOrientation>right</ribbonOrientation>
                 <ribbonColor>black</ribbonColor>
             </gitHub>
@@ -20,12 +19,12 @@
     </custom>
     <version position="right"/>
     <bannerLeft name="stopwatch (net.sasu.lib)"
-                href="https://gitea.snow4.sasu.org/net.sasu.lib/stopwatch/">
+                href="https://github.com/net-sasu-lib/stopwatch">
         <image src="images/stopwatch.svg" />
     </bannerLeft>
     <body>
         <links>
-            <item name="Github" href="https://github.com/sasuw/stopwatch"/>
+            <item name="Github" href="https://github.com/net-sasu-lib/stopwatch"/>
         </links>
         <menu name="Docs">
             <item name="README" href="about.html"/>

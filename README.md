@@ -77,27 +77,7 @@ public static void  main(String[] args) throws InterruptedException {
 
 ## License
 
-### ;TLDR
-
-Do what you want with it, no attribution necessary.
-
-### Zero-Clause BSD
-
-Copyright (C) 2024 and onwards by contributors of this project.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
-FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-
-Permission to use, copy, modify, and/or distribute this software for
-any purpose with or without fee is hereby granted.
+This project is licensed under the [MIT License](LICENSE). Feel free to use or modify it as appropriate for your own needs.
 
 ## Documentation
 
@@ -119,7 +99,7 @@ and navigate to http://localhost:8080/apidocs/index.html
 <dependency>
   <groupId>net.sasu.lib.time</groupId>
   <artifactId>stopwatch</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 

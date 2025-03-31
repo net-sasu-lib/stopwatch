@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>net.sasu.lib</groupId>
 		<artifactId>net-sasu-lib-parent</artifactId>
-		<version>1.0.2</version>
+		<version>[1.0.0,1.1.0)</version>
 	</parent>
 
 	<groupId>net.sasu.lib.time</groupId>
@@ -19,12 +19,6 @@
 	<description>Java 17 stopwatches for measuring elapsed time.</description>
 	<url>https://net.sasu.lib/stopwatch</url>
 
-	<scm>
-		<connection>scm:https://gitea.snow4.sasu.org/net.sasu.lib/stopwatch.git</connection>
-		<developerConnection>scm:jgit:git@gitea.snow4.sasu.org:net.sasu.lib/stopwatch.git</developerConnection>
-		<url>https://gitea.snow4.sasu.org/net.sasu.lib/stopwatch</url>
-	</scm>
-
 	<properties>
 	</properties>
 
@@ -32,18 +26,18 @@
 		<dependency>
 			<groupId>net.sasu.lib.time</groupId>
 			<artifactId>elapsedtime</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>[1.0.0,1.1.0)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math3</artifactId>
 			<version>3.6.1</version>
 		</dependency>
+        <dependency>
+		    <groupId>org.hamcrest</groupId>
+		    <artifactId>hamcrest</artifactId>
+		    <scope>test</scope>
+		</dependency>
 	</dependencies>
 
-	<!-- Known transitive dependencies -->
-	<!--
-		- commons-lang3 | net.sasu.lib.time/elapsedtime
-		- slf4j-nop | net.sasu.lib.time/elapsedtime
-	-->
 </project>
